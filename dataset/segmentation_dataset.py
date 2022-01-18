@@ -99,12 +99,21 @@ _COCO_INFORMATION = DatasetDescriptor(
     num_classes=10,
     ignore_label=255,
 )
+_CUSTOM_INFORMATION = DatasetDescriptor(
+    splits_to_sizes={
+        'train': CUSTOM_TRAIN_NUM_SAMPLES,  # num of samples in images/training with selected categories
+        'val': CUSTOM_VAL_NUM_SAMPLES,  # num of samples in images/validation with selected categories
+    },
+    num_classes=CUSTOM_NUM_CLASSES,
+    ignore_label=255,
+)
 
 _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
     'coco': _COCO_INFORMATION,
+    'v7coco':_CUSTOM_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.

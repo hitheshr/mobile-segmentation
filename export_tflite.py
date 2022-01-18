@@ -1,5 +1,6 @@
 
 import tensorflow as tf
+# import tensorflow.compat.v1 as tf
 import common
 import model
 
@@ -8,13 +9,13 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 INPUT_TENSOR_NAME = 'input_0'
-INPUT_SIZE = [1, 225, 225, 3]
-NUMBER_OF_CLASSES = 19
+INPUT_SIZE = [1, CUSTOM_INPUT_SIZE_ROWS, CUSTOM_INPUT_SIZE_COLS, 3]
+NUMBER_OF_CLASSES = CUSTOM_NUM_OF_CLASSES
 OUTPUT_STRIDE = 16
 
 MODEL_VARIANT = 'shufflenet_v2'
-USE_DPC = True
-CHECKPOINT_PATH = './checkpoints/cityscapes/dpc'
+USE_DPC = False
+CHECKPOINT_PATH = CUSTOM_CHECKPOINT_PATH
 
 OUT_PATH_TFLITE = CHECKPOINT_PATH + '/tflite_graph.tflite'
 OUT_PATH_FROZEN_GRAPH = CHECKPOINT_PATH + '/frozen_graph.pb'
@@ -83,7 +84,7 @@ if __name__ == '__main__':
                 y = graph.get_tensor_by_name('{}:0'.format(output_tensor_name))
 
             with tf.Session(graph=graph) as sess:
-                converter = tf.contrib.lite.TFLiteConverter.from_session(sess, [
+                converter = tf.lite.TFLiteConverter.from_session(sess, [
                     x], [y])
                 tflite_model = converter.convert()
                 open(OUT_PATH_TFLITE, "wb").write(tflite_model)
