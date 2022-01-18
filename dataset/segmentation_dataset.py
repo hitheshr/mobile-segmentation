@@ -113,7 +113,7 @@ _DATASETS_INFORMATION = {
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
     'coco': _COCO_INFORMATION,
-    'v7coco':_CUSTOM_INFORMATION,
+    'custom': _CUSTOM_INFORMATION,
 }
 
 # Default file pattern of TFRecord of TensorFlow Example.
